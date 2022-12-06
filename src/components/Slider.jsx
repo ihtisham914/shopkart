@@ -75,9 +75,16 @@ const Desc = styled.p`
 const Button = styled.button`
   padding: 10px;
   font-size: 20px;
+  color: white;
   background-color: transparent;
   cursor: pointer;
   border: 2px solid teal;
+  background-color: teal;
+  transition: 0.3s all;
+
+  &:hover {
+    background-color: #00b8b8;
+  }
 `;
 
 const Slider = () => {
