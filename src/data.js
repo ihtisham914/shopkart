@@ -25,7 +25,7 @@ export const sliderItems = [
     img: "/images/frok.png",
     title: "LOUGNEWEAR LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% FOR NEW ARRIVALS.",
-    bg: "fbf0f7",
+    bg: "FFD6DD",
   },
 ];
 

@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Wraper = styled.div`
-  padding: 10px 20px;
+  padding: 5px 20px;
   display: flex;
   justify-content: space-between;
 `;
@@ -21,7 +21,7 @@ const Left = styled.div`
 `;
 
 const Language = styled.div`
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
 `;
 
@@ -35,11 +35,21 @@ const SearchContainer = styled.div`
 
 const Input = styled.input`
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Center = styled.div`
   flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Image = styled.img`
+  height: 60px;
 `;
 
 const Logo = styled.h1`
@@ -55,7 +65,7 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled.div`
-  font-size: 14px;
+  font-size: 18px;
   cursor: pointer;
   margin-left: 25px;
 `;
@@ -72,6 +82,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
+          <Image src="/shopkart.png" />
           <Logo>shopkart.</Logo>
         </Center>
         <Right>
