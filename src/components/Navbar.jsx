@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Wraper = styled.div`
-  padding: 5px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
 `;
@@ -49,7 +49,8 @@ const Center = styled.div`
 `;
 
 const Image = styled.img`
-  height: 60px;
+  height: 40px;
+  margin-right: 10px;
 `;
 
 const Logo = styled.h1`
