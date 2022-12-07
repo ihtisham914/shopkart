@@ -6,6 +6,7 @@ import Categories from "../components/Categories";
 import Products from "../components/Products";
 import { ScaleLoader } from "react-spinners";
 import styled from "styled-components";
+import Newsletter from "../components/Newsletter";
 
 const Container = styled.div`
   display: flex;
@@ -43,6 +44,7 @@ const Home = () => {
           <Slider />
           <Categories />
           <Products />
+          <Newsletter />
         </div>
       )}
     </div>
