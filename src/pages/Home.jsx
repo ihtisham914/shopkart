@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
+import { ScaleLoader } from "react-spinners";
+import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Slider from "../components/Slider";
 import Categories from "../components/Categories";
 import Products from "../components/Products";
-import { ScaleLoader } from "react-spinners";
-import styled from "styled-components";
 import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -45,6 +46,7 @@ const Home = () => {
           <Categories />
           <Products />
           <Newsletter />
+          <Footer />
         </div>
       )}
     </div>
