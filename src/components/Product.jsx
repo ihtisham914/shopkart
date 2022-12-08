@@ -3,7 +3,8 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@material-ui/icons";
-import React from "react";
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -20,6 +21,7 @@ const Container = styled.div`
 
 const Image = styled.img`
   height: 75%;
+  width: 80%;
   z-index: 2;
 `;
 const Info = styled.div`
@@ -28,6 +30,10 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.5s all;
+  background-color: #f1f1f1;
+  border-radius: 30px;
+  backdrop-fiter: blur(20px);
 `;
 
 const Icon = styled.div`
@@ -35,6 +41,7 @@ const Icon = styled.div`
   height: 40px;
   border-radius: 50%;
   background-color: #fff;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,20 +57,33 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+  const [show, setShow] = useState(false);
+
   return (
     <Container>
-      <Image src={item.image} />
-      <Info>
-        <Icon title="add to cart">
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon title="know more about this product">
-          <SearchOutlined />
-        </Icon>
-        <Icon title="add to favorities">
-          <FavoriteBorderOutlined />
-        </Icon>
-      </Info>
+      <Image
+        src={item.image}
+        onMouseOver={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+      />
+
+      {show ? (
+        <Info onMouseEnter={() => setShow(true)}>
+          <Icon title="add to cart">
+            <ShoppingCartOutlined />
+          </Icon>
+          <Link to={`/product/${item.id}`}>
+            <Icon title="know more about this product">
+              <SearchOutlined />
+            </Icon>
+          </Link>
+          <Icon title="add to favorities">
+            <FavoriteBorderOutlined />
+          </Icon>
+        </Info>
+      ) : (
+        ""
+      )}
     </Container>
   );
 };
