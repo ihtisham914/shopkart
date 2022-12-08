@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import Newsletter from "../components/Newsletter";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -135,7 +136,7 @@ const Product = () => {
       .then((res) => res.json())
       .then((json) => setProduct(json));
     document.title = "Shopkart - product";
-  }, []);
+  }, [id]);
   console.log(product);
   const [amount, setAmount] = useState(1);
   return (
@@ -200,6 +201,7 @@ const Product = () => {
           />
         </LoadContainer>
       )}
+      <Newsletter />
     </Container>
   );
 };
