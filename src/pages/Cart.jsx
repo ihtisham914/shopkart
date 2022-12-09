@@ -1,4 +1,9 @@
-import { Add, Remove, ArrowBackOutlined } from "@material-ui/icons";
+import {
+  Add,
+  Remove,
+  ArrowBackOutlined,
+  DeleteRounded,
+} from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import React from "react";
@@ -149,18 +154,48 @@ const BackText = styled.span`
   font-size: 18px;
 `;
 
+const DeleteContainer = styled.div`
+  margin-right: 20px;
+  margin-top: 20px;
+`;
+
+// get data from local storage
+const getLocalData = () => {
+  const lists = localStorage.getItem("mycart");
+
+  if (lists) {
+    return JSON.parse(lists);
+  } else {
+    return [];
+  }
+};
+localStorage.clear();
+
 const Cart = () => {
   let totalAmount = 0;
   let price = 0;
   const { id } = useParams();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(getLocalData());
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
-      .then((json) => setCart([json, ...cart]));
-    document.title = "Shopkart - product";
+      .then((json) =>
+        setCart(() => {
+          {
+            cart.map((item) => {
+              if (item.id == id) return;
+            });
+          }
+          return [json, ...cart];
+        })
+      );
+    document.title = "Shopkart - Cart";
   }, [id]);
+
+  useEffect(() => {
+    localStorage.setItem("mycart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <Container>
@@ -190,9 +225,9 @@ const Cart = () => {
           <Info>
             {cart.map((item) => {
               price = item.price;
-              totalAmount = 5.9 + price;
+              totalAmount = totalAmount + 5.9 + price;
               return (
-                <Product>
+                <Product key={item.id}>
                   <ProductDetail>
                     <Image src={item.image} />
                     <Details>
@@ -214,6 +249,9 @@ const Cart = () => {
                     </AmountContainer>
                     <ProductPrice>{item.price}</ProductPrice>
                   </PriceDetail>
+                  <DeleteContainer>
+                    <DeleteRounded />
+                  </DeleteContainer>
                 </Product>
               );
             })}

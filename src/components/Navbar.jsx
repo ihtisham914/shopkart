@@ -4,6 +4,8 @@ import { Badge } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Container = styled.div`
   height: 60px;
@@ -72,7 +74,20 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 
+const getLocalData = () => {
+  const lists = localStorage.getItem("mycart");
+
+  if (lists) {
+    return JSON.parse(lists);
+  } else {
+    return [];
+  }
+};
+
 const Navbar = () => {
+  const [item, setItem] = useState(getLocalData());
+  let count = item.length;
+
   return (
     <Container>
       <Wraper>
@@ -99,7 +114,7 @@ const Navbar = () => {
           </Link>
           <MenuItem>
             <Link to="/cart">
-              <Badge badgeContent={1} color="primary">
+              <Badge badgeContent={`${count}`} color="primary">
                 <ShoppingCartOutlined color="action" />
               </Badge>
             </Link>
