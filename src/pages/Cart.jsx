@@ -1,5 +1,8 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, ArrowBackOutlined } from "@material-ui/icons";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div``;
@@ -75,12 +78,7 @@ const Details = styled.div`
 `;
 const ProductName = styled.span``;
 const ProductId = styled.span``;
-const ProductColor = styled.span`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
+
 const PriceDetail = styled.span`
   flex: 1;
   display: flex;
@@ -88,7 +86,6 @@ const PriceDetail = styled.span`
   justify-content: center;
   flex-direction: column;
 `;
-const ProductSize = styled.span``;
 
 const AmountContainer = styled.div`
   display: flex;
@@ -139,17 +136,50 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const BackContainer = styled.div`
+  display: flex;
+  align-items: center
+  gap: 20px;
+  margin-left:20px;
+  color: black;
+`;
+
+const BackText = styled.span`
+  font-weight: 500;
+  font-size: 18px;
+`;
+
 const Cart = () => {
+  let totalAmount = 0;
+  let price = 0;
+  const { id } = useParams();
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${id}`)
+      .then((res) => res.json())
+      .then((json) => setCart([json, ...cart]));
+    document.title = "Shopkart - product";
+  }, [id]);
+
   return (
     <Container>
+      <Link to="/">
+        <BackContainer>
+          <ArrowBackOutlined />
+          <BackText>Back</BackText>
+        </BackContainer>
+      </Link>
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton bgcolor="white" color="black">
-            CONTINUE SHOPPING
-          </TopButton>
+          <Link to="/productlist">
+            <TopButton bgcolor="white" color="black">
+              CONTINUE SHOPPING
+            </TopButton>
+          </Link>
           <TopTexts>
-            <TopText>Shopping Bag (2)</TopText>
+            <TopText>Shopping Bag (1)</TopText>
             <TopText>Your Whishlist (0)</TopText>
           </TopTexts>
           <TopButton bgcolor="teal" color="white">
@@ -158,38 +188,43 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="/images/jacket.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product: </b>LEATHER JACKET
-                  </ProductName>
-                  <ProductId>
-                    <b>ID: </b>565 613213
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size: </b>37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <AmountContainer>
-                  <Remove />
-                  <ProductAmount>2</ProductAmount>
-                  <Add />
-                </AmountContainer>
-                <ProductPrice>$ 22</ProductPrice>
-              </PriceDetail>
-            </Product>
+            {cart.map((item) => {
+              price = item.price;
+              totalAmount = 5.9 + price;
+              return (
+                <Product>
+                  <ProductDetail>
+                    <Image src={item.image} />
+                    <Details>
+                      <ProductName>
+                        <b>Product: </b>
+                        {item.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID: </b>
+                        {item.id}
+                      </ProductId>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <AmountContainer>
+                      <Remove />
+                      <ProductAmount>1</ProductAmount>
+                      <Add />
+                    </AmountContainer>
+                    <ProductPrice>{item.price}</ProductPrice>
+                  </PriceDetail>
+                </Product>
+              );
+            })}
+
             <Hr />
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal </SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {price}</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping </SummaryItemText>
@@ -197,7 +232,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total </SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {totalAmount}</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

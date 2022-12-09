@@ -69,9 +69,11 @@ const Product = ({ item }) => {
 
       {show ? (
         <Info onMouseEnter={() => setShow(true)}>
-          <Icon title="add to cart">
-            <ShoppingCartOutlined />
-          </Icon>
+          <Link to={`/cart/${item.id}`}>
+            <Icon title="add to cart">
+              <ShoppingCartOutlined />
+            </Icon>
+          </Link>
           <Link to={`/product/${item.id}`}>
             <Icon title="know more about this product">
               <SearchOutlined />

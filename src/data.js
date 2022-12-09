@@ -32,17 +32,22 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "/images/shirt.png",
-    title: "SHIRT STYLE!",
+    img: "/images/menclothing.png",
+    title: "MEN'S CLOTHING",
   },
   {
     id: 2,
-    img: "/images/jacket.png",
-    title: "LIGHT JACKETS",
+    img: "/images/loungewear.png",
+    title: "WOMEM'S CLOTHING",
   },
   {
-    id: 1,
-    img: "/images/loungewear.png",
-    title: "LOUNGEWEAR LOVE",
+    id: 3,
+    img: "/images/jewelery.png",
+    title: "JEWELERY",
+  },
+  {
+    id: 4,
+    img: "/images/electronics.png",
+    title: "ELECTRONICS",
   },
 ];

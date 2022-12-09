@@ -88,15 +88,22 @@ const Navbar = () => {
           <Logo>shopkart.</Logo>
         </Center>
         <Right>
+          <Link to="/">
+            <MenuItem>HOME</MenuItem>
+          </Link>
+          <Link to="/login">
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
+          <Link to="/register">
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
           <MenuItem>
             <Link to="/cart">
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={1} color="primary">
                 <ShoppingCartOutlined color="action" />
               </Badge>
             </Link>
           </MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <MenuItem>REGISTER</MenuItem>
         </Right>
       </Wraper>
     </Container>

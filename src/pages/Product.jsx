@@ -46,38 +46,12 @@ const Price = styled.span`
   font-size: 40px;
 `;
 
-const FilterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-  margin: 30px 0;
-`;
-const Filter = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const FilterTitle = styled.span`
-  font-size: 20px;
-  font-weight: 200;
-  margin-right: 10px;
-`;
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0 5px;
-`;
-const FilterSize = styled.select`
-  padding: 5px;
-`;
-const FilterSizeOption = styled.option``;
-
 const AddContainer = styled.div`
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 50px 0px;
 `;
 const AmountContainer = styled.div`
   display: flex;
@@ -137,11 +111,10 @@ const Product = () => {
       .then((json) => setProduct(json));
     document.title = "Shopkart - product";
   }, [id]);
-  console.log(product);
   const [amount, setAmount] = useState(1);
   return (
     <Container>
-      <Link to="/">
+      <Link to="/productlist">
         <BackContainer>
           <ArrowBackOutlined />
           <BackText>Back</BackText>
@@ -157,24 +130,6 @@ const Product = () => {
             <Title>{product.title}</Title>
             <Desc>{product.description}</Desc>
             <Price>$ {product.price}</Price>
-            <FilterContainer>
-              <Filter>
-                <FilterTitle>Color</FilterTitle>
-                <FilterColor color="black" />
-                <FilterColor color="darkblue" />
-                <FilterColor color="gray" />
-              </Filter>
-              <Filter>
-                <FilterTitle>Size:</FilterTitle>
-                <FilterSize>
-                  <FilterSizeOption>XS</FilterSizeOption>
-                  <FilterSizeOption>S</FilterSizeOption>
-                  <FilterSizeOption>M</FilterSizeOption>
-                  <FilterSizeOption>L</FilterSizeOption>
-                  <FilterSizeOption>XL</FilterSizeOption>
-                </FilterSize>
-              </Filter>
-            </FilterContainer>
             <AddContainer>
               <AmountContainer>
                 <Remove
